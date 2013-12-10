@@ -44,7 +44,7 @@ def display(key, value, Max=False):
 
 def cal_hour(Max=False):
 	hour_commit = []
-	os.system('git log --reverse | grep "Date\:   [A-Z][a-z][a-z]\s[A-Z][a-z][a-z]\s" > new.txt')
+	os.system('git log --reverse --format="%cd" > new.txt')
 
 	for j in range(len(hours)):
 		x = 0
@@ -63,7 +63,7 @@ def cal_hour(Max=False):
 
 def cal_week(Max=False):
 	days_commit = []
-	os.system('git log --reverse | grep "Date\:   [A-Z][a-z][a-z]\s[A-Z][a-z][a-z]\s" > new.txt')
+	os.system('git log --reverse --format="%cd" > new.txt')
 
 	for i in range(len(days)):
 		x = 0
@@ -82,7 +82,7 @@ def cal_week(Max=False):
 
 def cal_month(Max=False):
 	mon_commit = []
-	os.system('git log --reverse | grep "Date\:   [A-Z][a-z][a-z]\s[A-Z][a-z][a-z]\s" > new.txt')
+	os.system('git log --reverse --format="%cd" > new.txt')
 
 	for i in range(len(months)):
 		x = 0
