@@ -35,7 +35,7 @@ def git_log_calendar():
 	# month's label
 	monthLabel = "    "
 	mon = cursor.month
-	monthLabel = monthLabel + months[mon-1]
+	monthLabel = render(monthLabel + months[mon-1])
 	gap1 = 2
 
 	# to keep first month in some extra left
@@ -57,7 +57,7 @@ def git_log_calendar():
 				flag = False
 
 			mon = cursor.month				
-			monthLabel = monthLabel + " "*(2*(gap2-gap1)-3) + months[cursor.month-1] 
+			monthLabel = monthLabel + render(" "*(2*(gap2-gap1)-3) + months[cursor.month-1]) 
 			gap1 = gap2
 		
 		# marking as ' '(blank) for days of first week that are not counted in a year
@@ -122,3 +122,11 @@ def git_log_calendar():
 		for l in range(0,54):
 			x = '%s %s'%(x,(render(rank(Q1,Q2,Q3,weekly[l][k]))))
 		print x
+	
+	# less-more indicator color palatte
+	palatte = render('     Less ')
+	for x in range(5):
+		palatte = palatte + render(x) +  ' '
+	palatte = palatte + render(' More')
+	print palatte
+		

@@ -44,11 +44,14 @@ def rank(a,b,c,n):
 
 # show appropriate box in calendar
 def render(n):
+	# xterm color values for small calendar-box's background
 	colors = [254,71,47,2,22]
 	square = '■'
 	if(n==blank):
 		return blank
-	elif(n in days):
-		return n
-	else:
+	# supposed to be anyone of [0,1,2,3,4] (ranked)
+	elif(n<5):
 		return '\033[38;5;%dm%s\033[0m'%(colors[int(n)],square)
+	# supposed to be elements in lists 'days' and 'months' and color-palatte text
+	else:
+		return '\033[38;5;46m%s\033[0m'%(n)
