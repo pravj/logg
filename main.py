@@ -4,7 +4,7 @@
 Usage:
   main.py what
   main.py view [--timespan=<hour/week/month>] 
-  main.py calc
+  main.py calc [--past=N(years)]
 
 Options:
   (-h | --help)                 "Show this help-message screen"
@@ -123,7 +123,12 @@ def main():
 			print __doc__
 
 	elif args['calc']:
-		git_log_calendar()
+		if args['--past'] is None:
+			git_log_calendar(past=None)
+		elif(re.match(r'^\d+$',args['--past'])):
+			git_log_calendar(args['--past'])
+		else:
+			print 'option --past should be a number' #show perfection here
 
 	else:
 		print __doc__

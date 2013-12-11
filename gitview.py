@@ -6,16 +6,41 @@ from datetime import timedelta,date
 from helpers import command,rank,render,weekday
 from constants import blank,days,months
 
-def git_log_calendar():
+def git_log_calendar(past=None):
+	# help in finding starting date
+	os.system('git log --reverse --format="%ci" > first.txt')
+	with open('first.txt','r') as f:
+		data = f.read()
+	f.close()
+	first = re.match(r'(\d+)\-(\d+)\-(\d+)',data).groups()
+	os.system('rm first.txt')
+
+	today = date.today()
+	# lastyear, just 365 days in past
+	ly = today - timedelta(days=365)
+
+	# project starting date
+	startdate = date(int(first[0]),int(first[1]),int(first[2]))
+
+	if past is not None:
+		past = int(past)
+		# same as showing generally
+		if(past == 1):
+			pass
+		else:
+			# if history is available that back
+			if((today-startdate).days > (past-1)*365):
+				today = today - timedelta(days=365*(past-1))
+				ly = today - timedelta(days=365)
+			else:
+				# show perfection here
+				print 'This project does\'t have that long commit history'
+				print 'Showing current year contribution instead'
 
 	# today's date variables
-	today = date.today()
 	tyear = today.year
 	tmonth = today.month
 	tday = today.day
-	
-	# lastyear, just 365 days in past
-	ly = today - timedelta(days=365)
 
 	# represent each day of calendar, intially starting day of calendar
 	cursor = ly + timedelta(days=1)
@@ -129,4 +154,3 @@ def git_log_calendar():
 		palatte = palatte + render(x) +  ' '
 	palatte = palatte + render(' More')
 	print palatte
-		
