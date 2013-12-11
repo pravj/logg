@@ -4,6 +4,7 @@
 Usage:
   main.py what
   main.py view [--timespan=<hour/week/month>] 
+  main.py calc
 
 Options:
   (-h | --help)                 "Show this help-message screen"
@@ -15,6 +16,7 @@ import os
 import re
 from docopt import docopt
 from constants import blank,hours,days,months
+from gitview import git_log_calendar
 
 # display bar graph
 def display(key, value, Max=False):
@@ -119,6 +121,9 @@ def main():
 				print "Example : for mothly git history use try.py --timespan=month"
 		else:
 			print __doc__
+
+	elif args['calc']:
+		git_log_calendar()
 
 	else:
 		print __doc__
