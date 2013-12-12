@@ -42,7 +42,7 @@ def display(key, value, Max=False):
 				_perc_ = "(" +str(perc)[:4]+ "%)"
 				print "%s %s %s"%(key[i],_perc_,result)
 	else:
-		print 'r u mad'
+		print "you messed up.."
 
 def cal_hour(Max=False):
 	hour_commit = []
@@ -116,9 +116,10 @@ def main():
 			elif(args['--timespan']=='month'):
 				cal_month()
 			else:
-				# show perfection here
-				print "type try.py --timespan=<hour/week/month> [for corresponding timespan]"
-				print "Example : for mothly git history use try.py --timespan=month"
+				exc = ("type main.py --timespan=<hour/week/month> [for corresponding timespan]\n"
+					   "Example : for mothly git history use main.py --timespan=month")
+				# warn : wrong user input
+				print exc
 		else:
 			print __doc__
 
@@ -128,7 +129,8 @@ def main():
 		elif(re.match(r'^\d+$',args['--past'])):
 			git_log_calendar(args['--past'])
 		else:
-			print 'option --past should be a number' #show perfection here
+			# warn : wrong user input
+			print "option --past should be a number"
 
 	else:
 		print __doc__

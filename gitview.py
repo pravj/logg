@@ -7,6 +7,7 @@ from helpers import command,rank,render,weekday
 from constants import blank,days,months
 
 def git_log_calendar(past=None):
+
 	# help in finding starting date
 	os.system('git log --reverse --format="%ci" > first.txt')
 	with open('first.txt','r') as f:
@@ -38,8 +39,8 @@ def git_log_calendar(past=None):
 			else:
 				# now don't show calendar
 				show = False
-				# show perfection here
-				print 'This project does\'t have that long commit history'
+				# warn : wrong user input
+				print "This project does't have that long commit history"
 
 	if(show):
 		# today's date variables
