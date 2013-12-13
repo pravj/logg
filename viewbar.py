@@ -1,33 +1,44 @@
 # -*- encoding:utf-8 -*-
+
 import os
-from constants import hours,days,months
+from constants import hours,days,months,square
+from helpers import render
 
 # display bar graph
-def display(key, value, Max=False):
+def display(key,value,Max=False):
 	if(len(key) == len(value)):
-		tick = '▇'
 		if(Max):
 			maxindex = 0
+			match = max(value)
+			maxs = []
 			for i in range(len(value)):
-				if(value[i]>value[maxindex]):
+				if(value[i]>=match):
 					maxindex = i
+					maxs.append(maxindex)
 
-			maxvalue = value[maxindex]
-			return [maxindex,maxvalue]
+			# returns list of maximum's indexes
+			return maxs
 
 		else:
 			Sum = 0
 			for j in range(len(value)):
 				Sum = Sum + value[j]
+				
+			maxs = display(key,value,True)
 
 			for i in range(len(key)):
 				perc = (value[i]*100.0/Sum)
-				result = tick*int(perc)
+				result = square*int(perc)
 				_perc_ = "(" +str(perc)[:4]+ "%)"
-				print "%s %s %s"%(key[i],_perc_,result)
+				# highlights maximum's
+				if i in maxs:
+					print "%s %s %s"%(render(key[i]),render(_perc_),render(result))
+				else:
+					print "%s %s %s"%(key[i],_perc_,result)
 	else:
 		print "you messed up.."
 
+# calculate the hourly bar-graph
 def cal_hour(Max=False):
 	hour_commit = []
 	os.system('git log --reverse --format="%cd" > new.txt')
@@ -47,6 +58,7 @@ def cal_hour(Max=False):
 	else:
 		display(hours,hour_commit,False)
 
+# calculate the weekly bar-graph
 def cal_week(Max=False):
 	days_commit = []
 	os.system('git log --reverse --format="%cd" > new.txt')
@@ -66,6 +78,7 @@ def cal_week(Max=False):
 	else:
 		display(days,days_commit,False)
 
+# calculate the monthly bar-graph
 def cal_month(Max=False):
 	mon_commit = []
 	os.system('git log --reverse --format="%cd" > new.txt')

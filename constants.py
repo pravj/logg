@@ -1,5 +1,10 @@
+# -*- encoding:utf-8 -*-
+
 # to left blank somewhere in calendar
 blank = " "
+
+# block used for bar-graph and boxes in calendar
+square = '■'
 
 # weekdays with 'Sunday' as first day
 days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']

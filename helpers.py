@@ -2,7 +2,7 @@
 
 import calendar
 from subprocess import Popen, PIPE
-from constants import blank,days
+from constants import blank,days,square
 
 # return a word(string) with or without basic pluralization ??
 def grammer(freq):
@@ -46,7 +46,6 @@ def rank(a,b,c,n):
 def render(n):
 	# xterm color values for small calendar-box's background
 	colors = [254,71,47,2,22]
-	square = '■'
 	if(n==blank):
 		return blank
 	# supposed to be anyone of [0,1,2,3,4] (ranked)
