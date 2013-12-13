@@ -2,7 +2,7 @@
 
 import os
 from constants import hours,days,months,square
-from helpers import render
+from helpers import render,grammer
 
 # display bar graph
 def display(key,value,Max=False):
@@ -23,7 +23,7 @@ def display(key,value,Max=False):
 			Sum = 0
 			for j in range(len(value)):
 				Sum = Sum + value[j]
-				
+			
 			maxs = display(key,value,True)
 
 			for i in range(len(key)):
@@ -32,9 +32,16 @@ def display(key,value,Max=False):
 				_perc_ = "(" +str(perc)[:4]+ "%)"
 				# highlights maximum's
 				if i in maxs:
-					print "%s %s %s"%(render(key[i]),render(_perc_),render(result))
+					to_show = "%s %s %s"%(render(key[i]),render(_perc_),render(result))
 				else:
-					print "%s %s %s"%(key[i],_perc_,result)
+					to_show = "%s %s %s"%(key[i],_perc_,result)
+				if(value[i]!=0):
+					to_show = "%s [%d %s]"%(to_show,value[i],grammer(value[i]))
+					print to_show
+				else:
+					print to_show
+
+
 	else:
 		print "you messed up.."
 
